@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {Alert, View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import Input from "../components/Input";
@@ -8,15 +8,35 @@ import Input from "../components/Input";
 const StartGameScreen = props => {
 
 	const [textInput, textInputUpdate] = useState('');
+	const [confirmed, confirmedUpdate] = useState(false);
+	const [selectedNumber, selectedNumberUpdate] = useState();
 
 	const inputValidator = textInputted => {
-
 		// Replace everything that is not a number with ''
-
 		textInputUpdate(textInputted.replace(/[^0-9]/g, ''));
+	};
+	const confirmedInputHandler = () => {
+		confirmedUpdate(true);
 
+		const chosenNumber = parseInt(textInput);
+
+		if ( chosenNumber <=0 || isNaN(chosenNumber) || chosenNumber > 99 ) {
+			return;
+		}
+
+		// Please note that we can access textIjnput even though it has been set to '' because that would only
+		// get updated when the component is re-rendered and these 3 updates will get batched so that the
+		// component is only re-rendered once!
+
+		selectedNumberUpdate(chosenNumber);
+		textInputUpdate('');
 	};
 
+	let confirmedOutput;
+
+	if (confirmed) {
+		confirmedOutput = <Text> Chosen Number: {selectedNumber} </Text>
+	}
 
 	return (
 		<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -37,11 +57,16 @@ const StartGameScreen = props => {
 					/>
 
 					<View style={styles.buttonContainer}>
-						<View style={styles.button}><Button title='Confirm' color={Colors.primary}/></View>
-						<View style={styles.button}><Button title='Reset' color={Colors.accent}/></View>
+						<View style={styles.button}><Button title='Confirm' color={Colors.primary} onPress={confirmedInputHandler}/></View>
+						<View style={styles.button}><Button title='Reset' color={Colors.accent} onPress={() => {
+							textInputUpdate("");
+							confirmedUpdate(false);}}
+						/>
+						</View>
 					</View>
 
 				</Card>
+				{confirmedOutput}
 
 			</View>
 		</TouchableWithoutFeedback>
