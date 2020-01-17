@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import React, {useState} from 'react';
+import {Alert, View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import Input from "../components/Input";
@@ -7,28 +7,47 @@ import Input from "../components/Input";
 
 const StartGameScreen = props => {
 
+	const [textInput, textInputUpdate] = useState('');
+
+	const inputValidator = textInputted => {
+
+		// Replace everything that is not a number with ''
+
+		textInputUpdate(textInputted.replace(/[^0-9]/g, ''));
+
+	};
+
+
 	return (
-		<View style = {styles.screen}>
-			<Text style={styles.title}> {props.title}</Text>
-			<Card style={styles.inputContainer}>
+		<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+			<View style={styles.screen}>
+				<Text style={styles.title}> {props.title}</Text>
+				<Card style={styles.inputContainer}>
 
-				<Text> Select a Number</Text>
-				<Input style={styles.textInputContainer}/>
+					<Text> Select a Number</Text>
+					<Input
+						style={styles.textInputContainer}
+						autoCorrect={false}
+						keyboardType="number-pad"
+						maxLength={2}
+						autoCapitalize='none'
+						blurOnSubmit
+						onChangeText={inputValidator}
+						value={textInput}
+					/>
 
-				<View style={styles.buttonContainer}>
-					<View style={styles.button}><Button  title='Confirm' color={Colors.primary}  /></View>
-					<View style={styles.button}><Button title='Reset' color={Colors.accent}  /></View>
-				</View>
+					<View style={styles.buttonContainer}>
+						<View style={styles.button}><Button title='Confirm' color={Colors.primary}/></View>
+						<View style={styles.button}><Button title='Reset' color={Colors.accent}/></View>
+					</View>
 
-			</Card>
+				</Card>
 
-		</View>
+			</View>
+		</TouchableWithoutFeedback>
 	);
 
 };
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -59,7 +78,6 @@ const styles = StyleSheet.create({
 		width: 50,
 		textAlign: 'center'
 	}
-
 
 
 });
