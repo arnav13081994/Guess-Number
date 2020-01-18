@@ -3,6 +3,8 @@ import {Alert, View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboar
 import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import Input from "../components/Input";
+import Number from "../components/Number";
+
 
 const StartGameScreen = props => {
 
@@ -18,6 +20,7 @@ const StartGameScreen = props => {
 	const resetInputHandler = () => {
 		textInputUpdate("");
 		confirmedUpdate(false);
+		Keyboard.dismiss();
 	};
 
 	const dismissKeyboardHandler = () => {
@@ -35,7 +38,7 @@ const StartGameScreen = props => {
 				[{
 					text: "Okay",
 					style: "destructive",
-
+					onPress: resetInputHandler()
 				}]
 			);
 			return;
@@ -47,12 +50,18 @@ const StartGameScreen = props => {
 
 		selectedNumberUpdate(chosenNumber);
 		textInputUpdate('');
+		dismissKeyboardHandler();
 	};
 
 	let confirmedOutput;
 
 	if (confirmed) {
-		confirmedOutput = <Text> Chosen Number: {selectedNumber} </Text>
+		confirmedOutput = <Card style={styles.summaryContainer}>
+				<Text> You Selected </Text>
+				<Number> {selectedNumber} </Number>
+				<Button title="START GAME" />
+
+		</Card>
 	}
 
 	return (
@@ -94,7 +103,7 @@ const StartGameScreen = props => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		padding: 10,
+		padding: 75,
 		alignItems: 'center',
 	},
 	buttonContainer: {
@@ -118,6 +127,10 @@ const styles = StyleSheet.create({
 	textInputContainer: {
 		width: 50,
 		textAlign: 'center'
+	},
+	summaryContainer: {
+		marginTop: 20,
+		alignItems: 'center'
 	}
 
 
