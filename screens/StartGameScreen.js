@@ -4,7 +4,6 @@ import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import Input from "../components/Input";
 
-
 const StartGameScreen = props => {
 
 	const [textInput, textInputUpdate] = useState('');
@@ -15,12 +14,30 @@ const StartGameScreen = props => {
 		// Replace everything that is not a number with ''
 		textInputUpdate(textInputted.replace(/[^0-9]/g, ''));
 	};
+
+	const resetInputHandler = () => {
+		textInputUpdate("");
+		confirmedUpdate(false);
+	};
+
+	const dismissKeyboardHandler = () => {
+		Keyboard.dismiss();
+	};
+
 	const confirmedInputHandler = () => {
 		confirmedUpdate(true);
 
 		const chosenNumber = parseInt(textInput);
 
-		if ( chosenNumber <=0 || isNaN(chosenNumber) || chosenNumber > 99 ) {
+		if (chosenNumber <= 0 || isNaN(chosenNumber) || chosenNumber > 99) {
+			Alert.alert('Invalid Number!',
+				'Please enter a number between 1 and 99',
+				[{
+					text: "Okay",
+					style: "destructive",
+
+				}]
+			);
 			return;
 		}
 
@@ -39,7 +56,7 @@ const StartGameScreen = props => {
 	}
 
 	return (
-		<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+		<TouchableWithoutFeedback onPress={dismissKeyboardHandler}>
 			<View style={styles.screen}>
 				<Text style={styles.title}> {props.title}</Text>
 				<Card style={styles.inputContainer}>
@@ -57,12 +74,11 @@ const StartGameScreen = props => {
 					/>
 
 					<View style={styles.buttonContainer}>
-						<View style={styles.button}><Button title='Confirm' color={Colors.primary} onPress={confirmedInputHandler}/></View>
-						<View style={styles.button}><Button title='Reset' color={Colors.accent} onPress={() => {
-							textInputUpdate("");
-							confirmedUpdate(false);}}
-						/>
-						</View>
+
+						<View style={styles.button}><Button title='Confirm' color={Colors.primary}
+						                                    onPress={confirmedInputHandler}/></View>
+						<View style={styles.button}><Button title='Reset' color={Colors.accent}
+						                                    onPress={resetInputHandler}/></View>
 					</View>
 
 				</Card>
