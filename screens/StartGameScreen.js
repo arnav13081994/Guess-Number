@@ -70,7 +70,7 @@ const StartGameScreen = props => {
 				<Text style={styles.title}> {props.title}</Text>
 				<Card style={styles.inputContainer}>
 
-					<Text> Select a Number</Text>
+					<Text> Select a Number: </Text>
 					<Input
 						style={styles.textInputContainer}
 						autoCorrect={false}
@@ -103,8 +103,9 @@ const StartGameScreen = props => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		padding: 75,
+		padding: 10,
 		alignItems: 'center',
+		marginTop: 75
 	},
 	buttonContainer: {
 		flexDirection: 'row',
@@ -120,6 +121,7 @@ const styles = StyleSheet.create({
 		width: 300,
 		maxWidth: '80%',
 		alignItems: 'center',
+		marginTop: 20
 	},
 	button: {
 		width: 100
