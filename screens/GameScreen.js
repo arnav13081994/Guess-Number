@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, StyleSheet, Button, Alert} from 'react-native'
 import Number from "../components/Number";
 import Card from "../components/Card";
@@ -46,6 +46,14 @@ const GameScreen = (props) => {
 		const nextNumber = generateRandomNumber(currentLow.current, currentHigh.current, currentGuess);
 		currentGuessUpdate(nextNumber);
 	};
+
+	useEffect( () => {
+
+		if ( currentGuess === props.userChoice ) {
+			props.onGameOver(true);
+		}
+
+	});
 
 	return (
 		<View style={styles.screen}>

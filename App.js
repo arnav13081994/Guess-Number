@@ -3,18 +3,26 @@ import {StyleSheet, Text, View} from 'react-native';
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
+import GameOver from "./screens/GameOver";
+
 
 export default function App() {
 
 	const [userNumber, selectedNumberUpdate] = useState();
+	const [gameOver, gameOverUpdate] = useState(false);
 
 	const startGamehandler = (selectedNumber) => {
 		selectedNumberUpdate(selectedNumber);
 	};
 
 	let content = <StartGameScreen title="Start a new Game?" onStartGame={startGamehandler}  />;
+
 	if (userNumber) {
-		content = <GameScreen userChoice={userNumber} />
+		content = <GameScreen userChoice={userNumber} onGameOver={gameOverUpdate} />
+	}
+
+	if (gameOver) {
+		content = <GameOver />
 	}
 
 	return (
