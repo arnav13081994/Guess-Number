@@ -20,6 +20,7 @@ const GameScreen = (props) => {
 	const [currentGuess, currentGuessUpdate] = useState(generateRandomNumber(1, 100, props.userChoice));
 	const currentLow = useRef(1);
 	const currentHigh = useRef(100);
+	let numOfGuesses = useRef(0);
 
 
 	const updateGuessGreater = () => {
@@ -49,8 +50,10 @@ const GameScreen = (props) => {
 
 	useEffect( () => {
 
+		numOfGuesses.current += 1;
+
 		if ( currentGuess === props.userChoice ) {
-			props.onGameOver(true);
+			props.onGameOver(numOfGuesses.current);
 		}
 
 	});
