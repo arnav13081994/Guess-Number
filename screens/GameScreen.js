@@ -1,39 +1,62 @@
-import React, {useState} from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native'
+import React, {useState, useRef} from 'react';
+import {View, Text, StyleSheet, Button, Alert} from 'react-native'
 import Number from "../components/Number";
 import Card from "../components/Card";
 
-const generateRandomNumber = (min ,max, exclude) => {
+const generateRandomNumber = (min, max, exclude) => {
 	min = Math.ceil(min);
 	max = Math.floor(max);
-	const rndNumber = Math.floor(Math.random()*(max-min)) + min;
+	const rndNumber = Math.floor(Math.random() * (max - min)) + min;
 
-	if (rndNumber === exclude ) {
-		return generateRandomNumber(min ,max, exclude);
+	if (rndNumber === exclude) {
+		return generateRandomNumber(min, max, exclude);
 	} else {
 		return rndNumber;
 	}
 };
 
 
-const updateGuess = () => {
-
-
-};
-
 const GameScreen = (props) => {
-	const [currentGuesss, currentGuesUpdate ] = useState(generateRandomNumber(1, 100, props.userChoice));
+	const [currentGuess, currentGuessUpdate] = useState(generateRandomNumber(1, 100, props.userChoice));
+	const currentLow = useRef(1);
+	const currentHigh = useRef(100);
+
+
+	const updateGuessGreater = () => {
+
+		if ( currentGuess > props.userChoice ) {
+
+			Alert.alert("Don\'t lie!", "You know this is not correct. Press Lower!", [{text: "Okay", style: "cancel"}]);
+			return
+		}
+
+		currentLow.current = currentGuess;
+		const nextNumber = generateRandomNumber(currentLow.current, currentHigh.current, currentGuess);
+		currentGuessUpdate(nextNumber);
+	};
+	const updateGuessLower = () => {
+
+		if ( currentGuess < props.userChoice ) {
+
+			Alert.alert("Don\'t lie!", "You know this is not correct. Press Greater!", [{text: "Okay", style: "cancel"}]);
+			return
+		}
+
+		currentHigh.current = currentGuess;
+		const nextNumber = generateRandomNumber(currentLow.current, currentHigh.current, currentGuess);
+		currentGuessUpdate(nextNumber);
+	};
 
 	return (
 		<View style={styles.screen}>
 
 			<Text> Opponents Guess: </Text>
 
-			<Number> {currentGuesss} </Number>
+			<Number> {currentGuess} </Number>
 
 			<Card style={styles.buttonContainer}>
-				<Button title='Greater' onPress={updateGuess}/>
-				<Button title='Lower' onPress={updateGuess}/>
+				<Button title='Greater' onPress={updateGuessGreater}/>
+				<Button title='Lower' onPress={updateGuessLower}/>
 			</Card>
 
 		</View>
@@ -56,7 +79,6 @@ const styles = StyleSheet.create({
 
 
 });
-
 
 
 export default GameScreen;
