@@ -1,14 +1,11 @@
 {
   "expo": {
-    "name": "Second",
-    "slug": "Second",
+    "name": "Guess the number",
+    "slug": "guess-the-number",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "githubUrl": "https://github.com/arnav13081994/Guess-Number",
+    "description": " This is a game where the user is asked to enter a number between 1 and 100 and the computer then attempts to guess it",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +21,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gamergaming.guessnumber"
+    },
+    "android": {
+      "package": "com.gamergaming.guessnumber"
     }
   }
 }

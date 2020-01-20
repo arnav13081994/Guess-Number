@@ -12,3 +12,6 @@ It has the following features:
 3) The user can give hints to the computer.
 4) Extensive validations have been added so that the user can't fool the computer.
 5) When the computer guesses the correct number, the number chosen, the number of guesses it took to get there are displayed in a new screen.
+
+
+Link for App builds: https://expo.io/dashboard/arnav13
