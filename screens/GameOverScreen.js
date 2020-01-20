@@ -1,27 +1,32 @@
 import React from 'react';
-import {Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 import Card from "../components/Card";
-
+import Number from "../components/Number";
 
 const GameOverScreen = props => {
 
 	const resetGameHandler = () => {
-
 		props.countUpdate(0);
 		props.userNumberUpdate();
-
 	};
 
 	return (
-		<Card>
-			<Text> GAME OVER!</Text>
-			<Text> It took {props.count} guesses </Text>
-			<Text> Number was {props.userNumber}  </Text>
-			<Button
-				title='Start a new game?'
-				onPress={resetGameHandler}
-			/>
-		</Card>
+		<View style={styles.screen}>
+			<Text style={{fontSize:22, marginTop: 100}}> GAME OVER!</Text>
+			<View style={styles.textcontainer}>
+				<Text> It took  </Text>
+				<Number> {props.count} tries </Number>
+				<Text> Your Number was </Text>
+				<Number> {props.userNumber}  </Number>
+			</View>
+			<Card style={styles.card}>
+				<Button
+					title='Start a new game?'
+					onPress={resetGameHandler}
+				/>
+			</Card>
+
+		</View>
 
 
 	);
@@ -29,7 +34,22 @@ const GameOverScreen = props => {
 };
 
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	screen: {
+		flex: 1,
+		alignItems: 'center',
+	},
+	card: {
+		justifyContent: 'center',
+		marginBottom: 125,
+	},
+	textcontainer: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginVertical: 50
+
+	}
+});
 
 
 export default GameOverScreen;
