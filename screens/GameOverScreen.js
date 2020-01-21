@@ -25,9 +25,13 @@ const GameOverScreen = props => {
 				/>
 			</Card>
 			<View style={{...Defaultstyles.bodyText, ...styles.textcontainer}}>
-				<Text> It took </Text>
-				<Number> {props.count} tries </Number>
-				<Text> Your Number was </Text>
+
+				<View style={{...Defaultstyles.bodyText, ...styles.textViewcontainer}}>
+					<Text> It took </Text>
+					<Text style={{color: Colors.primary, fontFamily:'open-sans-bold'}}> {props.count} </Text>
+					<Text> tries to guess your Number </Text>
+				</View>
+
 				<Number> {props.userNumber}  </Number>
 			</View>
 			<Card style={styles.card}>
@@ -52,7 +56,6 @@ const styles = StyleSheet.create({
 	},
 	textcontainer: {
 		alignItems: 'center',
-		justifyContent: 'center',
 		marginVertical: 25
 	},
 	image: {
@@ -68,6 +71,10 @@ const styles = StyleSheet.create({
 		borderColor: Colors.accent,
 		borderWidth:2,
 		overflow: 'hidden'
+	},
+	textViewcontainer: {
+		flexDirection: 'row',
+		fontSize: 20,
 	}
 });
 

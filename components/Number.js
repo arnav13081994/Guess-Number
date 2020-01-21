@@ -7,7 +7,7 @@ import Defaultstyles from "../constants/Default-styles";
 const Number = props => {
 
 	return (
-		<View style={styles.container}>
+		<View style={{...styles.container, ...props.style}}>
 			<Text style={{...Defaultstyles.titleText,...styles.number}}>{props.children} </Text>
 		</View>
 	);
@@ -17,16 +17,17 @@ const Number = props => {
 const styles = StyleSheet.create({
 	container: {
 
-		borderWidth: 2,
+		borderWidth: 1,
 		borderColor: Colors.accent,
 		padding: 10,
-		alignItems: 'center',
-		justifyContent: 'center',
 		borderRadius: 10,
-		marginVertical: 10
+		marginVertical: 10,
+		width: '20%',
 	},
 	number: {
-		color: Colors.accent
+		color: Colors.accent,
+		textAlign: 'center',
+
 	}
 });
 
