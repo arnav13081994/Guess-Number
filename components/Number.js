@@ -1,13 +1,14 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import Colors from "../constants/Colors";
+import Defaultstyles from "../constants/Default-styles";
 
 
 const Number = props => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.number}>{props.children} </Text>
+			<Text style={{...Defaultstyles.titleText,...styles.number}}>{props.children} </Text>
 		</View>
 	);
 };
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
 		marginVertical: 10
 	},
 	number: {
-		fontSize: 22,
 		color: Colors.accent
 	}
 });

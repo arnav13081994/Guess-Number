@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import Card from "../components/Card";
 import Number from "../components/Number";
+import Defaultstyles from "../constants/Default-styles";
 
 const GameOverScreen = props => {
 
@@ -12,8 +13,8 @@ const GameOverScreen = props => {
 
 	return (
 		<View style={styles.screen}>
-			<Text style={{fontSize:22, marginTop: 100}}> GAME OVER!</Text>
-			<View style={styles.textcontainer}>
+			<Text style={{...Defaultstyles.titleText, fontSize:22, marginTop: 100}}> GAME OVER!</Text>
+			<View style={{...Defaultstyles.bodyText,...styles.textcontainer}}>
 				<Text> It took  </Text>
 				<Number> {props.count} tries </Number>
 				<Text> Your Number was </Text>

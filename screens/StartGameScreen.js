@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import Input from "../components/Input";
 import Number from "../components/Number";
-
+import Defaultstyles from "../constants/Default-styles";
 
 const StartGameScreen = props => {
 
@@ -67,10 +67,10 @@ const StartGameScreen = props => {
 	return (
 		<TouchableWithoutFeedback onPress={dismissKeyboardHandler}>
 			<View style={styles.screen}>
-				<Text style={styles.title}> {props.title}</Text>
+				<Text style={{...Defaultstyles.titleText, ...styles.title}}> {props.title}</Text>
 				<Card style={styles.inputContainer}>
 
-					<Text> Select a Number: </Text>
+					<Text style={Defaultstyles.bodyText}> Select a Number: </Text>
 					<Input
 						style={styles.textInputContainer}
 						autoCorrect={false}
@@ -114,8 +114,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	title: {
-		fontSize: 20,
-		marginVertical: 10,
+		marginVertical: 10
 	},
 	inputContainer: {
 		width: 300,
