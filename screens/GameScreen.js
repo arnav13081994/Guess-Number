@@ -38,7 +38,6 @@ const GameScreen = (props) => {
 
 
 	const updatePastGuessesHandler = (guess) => {
-		console.log("Current guess is " + guess);
 		pastGuessesUpdate([
 			...pastGuesses, {
 				key: guess.toString(), value: guess
@@ -114,7 +113,6 @@ const GameScreen = (props) => {
 				ListEmptyComponent={<View><Text>NO ITEMS</Text></View>} //TODO Needs to be styles in a better way. Show some image instead.
 				renderItem={
 					item => {
-						console.log("item is ", item);
 						return (
 							<View>
 								<Text> {item.item.value} </Text>
