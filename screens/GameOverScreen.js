@@ -1,9 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
+
+
 import Card from "../components/Card";
 import Number from "../components/Number";
 import Defaultstyles from "../constants/Default-styles";
 import Colors from "../constants/Colors";
+import MainButton from "../components/MainButton";
+
 
 
 const GameOverScreen = props => {
@@ -34,12 +38,12 @@ const GameOverScreen = props => {
 
 				<Number> {props.userNumber}  </Number>
 			</View>
-			<Card style={styles.card}>
-				<Button
-					title='Start a new game?'
+			<View style={styles.card}>
+				<MainButton
 					onPress={resetGameHandler}
-				/>
-			</Card>
+				>Start a new game?
+				</MainButton>
+			</View>
 		</View>
 	);
 };
@@ -61,16 +65,16 @@ const styles = StyleSheet.create({
 	image: {
 		width: '100%',
 		height: '100%',
+		borderRadius:100,
 	},
 	imageContainer: {
 		width: 200,
 		height: 200,
 		marginTop: 10,
-		padding: 0,
-		borderRadius:50,
+		padding: 5,
+		borderRadius:100,
 		borderColor: Colors.accent,
-		borderWidth:2,
-		overflow: 'hidden'
+		// overflow: 'hidden'
 	},
 	textViewcontainer: {
 		flexDirection: 'row',
