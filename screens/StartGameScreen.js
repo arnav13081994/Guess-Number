@@ -63,7 +63,6 @@ const StartGameScreen = props => {
 		confirmedOutput = <Card style={styles.summaryContainer}>
 				<Text> You Selected </Text>
 				<Number> {selectedNumber} </Number>
-				{/*<Button title="START GAME" onPress={ () => props.onStartGame(selectedNumber) }/>*/}
 				<MainButton onPress={ () => props.onStartGame(selectedNumber) }>
 					START GAME
 				</MainButton>
@@ -91,7 +90,8 @@ const StartGameScreen = props => {
 
 					<View style={styles.buttonContainer}>
 
-						<View style={styles.button}><Button title='Confirm' color={Colors.primary}
+						<View style={styles.button}>
+							<Button title='Confirm' color={Colors.primary}
 						                                    onPress={confirmedInputHandler}/></View>
 						<View style={styles.button}><Button title='Reset' color={Colors.accent}
 						                                    onPress={resetInputHandler}/></View>
