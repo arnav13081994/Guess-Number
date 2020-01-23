@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList, Alert} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Alert, Image, ScrollView} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 
@@ -7,6 +7,7 @@ import MainButton from "../components/MainButton";
 import Number from "../components/Number";
 import Card from "../components/Card";
 import Defaultstyles from "../constants/Default-styles";
+
 
 const generateRandomNumber = (min, max, exclude) => {
 	min = Math.ceil(min);
@@ -25,10 +26,10 @@ const GameScreen = (props) => {
 	const initialGuess = generateRandomNumber(1, 100, props.userChoice);
 	const [currentGuess, currentGuessUpdate] = useState(initialGuess);
 	const [pastGuesses, pastGuessesUpdate] = useState([
-		{
-			key: initialGuess.toString(),
-			value: initialGuess
-		}
+			{
+				key: initialGuess.toString(),
+				value: initialGuess
+			}
 		]
 	);
 
@@ -93,9 +94,9 @@ const GameScreen = (props) => {
 
 
 	return (
-		<View style={styles.screen}>
+		<ScrollView contentContainerStyle={styles.screen}>
 
-			<Text style={Defaultstyles.titleText}> Opponents Guess: </Text>
+			<Text style={{...Defaultstyles.titleText, marginTop: 75}}> Opponents Guess: </Text>
 
 			<Number> {currentGuess} </Number>
 
@@ -107,22 +108,46 @@ const GameScreen = (props) => {
 					<Ionicons name="md-remove" size={24} color="white"/>
 				</MainButton>
 			</Card>
-			<Text style={Defaultstyles.titleText}> Guesses so far: </Text>
+			<Text style={{...Defaultstyles.titleText, marginVertical: 25}}> Guesses so far: </Text>
 			<FlatList
 				data={pastGuesses}
-				ListEmptyComponent={<View><Text>NO ITEMS</Text></View>} //TODO Needs to be styles in a better way. Show some image instead.
+				style={{
+					width: 500,
+					maxWidth: '80%',
+				}}
+				ListEmptyComponent={
+					<View>
+						<Text>NO ITEMS</Text>
+						<Image
+							source={require("../assets/shrug.png")}
+						/>
+					</View>
+				}
 				renderItem={
 					item => {
+						console.log(item);
 						return (
-							<View>
-								<Text> {item.item.value} </Text>
-							</View>
+							<Card style={
+								{...Defaultstyles.bodyText,
+									marginVertical: 5,
+									padding:10,
+									borderWidth: 1,
+									alignItems: 'center'
+								}
+							}>
+								<Text>
+									<Text style={{fontWeight: '800'}}>
+										Round {item.index + 1}
+									</Text>
+									: {item.item.value}
+								</Text>
+							</Card>
 						);
 					}
 				}
 			/>
 
-		</View>
+		</ScrollView>
 	);
 };
 

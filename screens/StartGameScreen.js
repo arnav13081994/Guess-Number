@@ -3,11 +3,11 @@ import {Alert, View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboar
 
 
 import Card from "../components/Card";
-import Colors from "../constants/Colors";
 import Input from "../components/Input";
 import Number from "../components/Number";
 import Defaultstyles from "../constants/Default-styles";
 import MainButton from "../components/MainButton";
+import {Entypo, Feather} from "@expo/vector-icons";
 
 
 const StartGameScreen = props => {
@@ -61,11 +61,11 @@ const StartGameScreen = props => {
 
 	if (confirmed) {
 		confirmedOutput = <Card style={styles.summaryContainer}>
-				<Text> You Selected </Text>
-				<Number> {selectedNumber} </Number>
-				<MainButton onPress={ () => props.onStartGame(selectedNumber) }>
-					START GAME
-				</MainButton>
+			<Text> You Selected </Text>
+			<Number> {selectedNumber} </Number>
+			<MainButton onPress={() => props.onStartGame(selectedNumber)}>
+				START GAME
+			</MainButton>
 
 		</Card>
 	}
@@ -89,12 +89,13 @@ const StartGameScreen = props => {
 					/>
 
 					<View style={styles.buttonContainer}>
+						<MainButton onPress={confirmedInputHandler} style={styles.button} >
+							<Feather name="check" size={28} color="white"/>
+						</MainButton>
 
-						<View style={styles.button}>
-							<Button title='Confirm' color={Colors.primary}
-						                                    onPress={confirmedInputHandler}/></View>
-						<View style={styles.button}><Button title='Reset' color={Colors.accent}
-						                                    onPress={resetInputHandler}/></View>
+						<MainButton onPress={resetInputHandler} style={styles.button}>
+							<Entypo name="cross" size={28} color="white"/>
+						</MainButton>
 					</View>
 
 				</Card>
@@ -130,7 +131,8 @@ const styles = StyleSheet.create({
 		marginTop: 20
 	},
 	button: {
-		width: 100
+		width: 100,
+		alignItems: 'center',
 	},
 	textInputContainer: {
 		width: 50,
