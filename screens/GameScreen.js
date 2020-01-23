@@ -108,10 +108,10 @@ const GameScreen = (props) => {
 					<Ionicons name="md-remove" size={24} color="white"/>
 				</MainButton>
 			</Card>
-			<Text style={{...Defaultstyles.titleText, marginVertical: 25}}> Guesses so far: </Text>
+			<Text style={{...Defaultstyles.titleText, marginVertical: 25}}> {numOfGuesses.current + 1} Guesses so far: </Text>
 			<FlatList
 				data={pastGuesses}
-				style={{
+				contentContainerStyle={{
 					width: 500,
 					maxWidth: '80%',
 				}}
@@ -128,9 +128,10 @@ const GameScreen = (props) => {
 						console.log(item);
 						return (
 							<Card style={
-								{...Defaultstyles.bodyText,
+								{
+									...Defaultstyles.bodyText,
 									marginVertical: 5,
-									padding:10,
+									padding: 10,
 									borderWidth: 1,
 									alignItems: 'center'
 								}
