@@ -94,21 +94,6 @@ const GameScreen = (props) => {
 
 
 	return (
-		<ScrollView contentContainerStyle={styles.screen}>
-
-			<Text style={{...Defaultstyles.titleText, marginTop: 75}}> Opponents Guess: </Text>
-
-			<Number> {currentGuess} </Number>
-
-			<Card style={styles.buttonContainer}>
-				<MainButton onPress={updateGuessGreater}>
-					<Ionicons name="md-add" size={24} color="white"/>
-				</MainButton>
-				<MainButton onPress={updateGuessLower}>
-					<Ionicons name="md-remove" size={24} color="white"/>
-				</MainButton>
-			</Card>
-			<Text style={{...Defaultstyles.titleText, marginVertical: 25}}> {numOfGuesses.current + 1} Guesses so far: </Text>
 			<FlatList
 				data={pastGuesses}
 				contentContainerStyle={{
@@ -125,7 +110,7 @@ const GameScreen = (props) => {
 				}
 				renderItem={
 					item => {
-						console.log(item);
+						// console.log(item);
 						return (
 							<Card style={
 								{
@@ -146,9 +131,28 @@ const GameScreen = (props) => {
 						);
 					}
 				}
+
+				ListHeaderComponent={
+							<View style={styles.screen}>
+
+								<Text style={{...Defaultstyles.titleText, marginTop: 75, alignItems: 'center',}}> Opponents Guess: </Text>
+
+								<Number> {currentGuess} </Number>
+
+								<Card style={styles.buttonContainer}>
+									<MainButton onPress={updateGuessGreater}>
+										<Ionicons name="md-add" size={24} color="white"/>
+									</MainButton>
+									<MainButton onPress={updateGuessLower}>
+										<Ionicons name="md-remove" size={24} color="white"/>
+									</MainButton>
+								</Card>
+								<Text style={{...Defaultstyles.titleText, marginVertical: 25}}> {numOfGuesses.current + 1} Guesses so far: </Text>
+
+							</View>
+				}
 			/>
 
-		</ScrollView>
 	);
 };
 
