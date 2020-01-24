@@ -1,5 +1,14 @@
 import React, {useState} from 'react';
-import {Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View, ScrollView} from 'react-native';
+import {
+	Alert,
+	Keyboard,
+	StyleSheet,
+	Text,
+	TouchableWithoutFeedback,
+	View,
+	ScrollView,
+	KeyboardAvoidingView
+} from 'react-native';
 
 
 import Card from "../components/Card";
@@ -10,6 +19,7 @@ import MainButton from "../components/MainButton";
 import {Entypo, Feather} from "@expo/vector-icons";
 
 
+	// TODO Make the Returned JsX style dynamic by using the ternary operator etc and test it on 4 sizes: Small and Big Android & iOS
 const StartGameScreen = props => {
 
 	const [textInput, textInputUpdate] = useState('');
@@ -72,38 +82,40 @@ const StartGameScreen = props => {
 
 	return (
 		<ScrollView>
-			<TouchableWithoutFeedback onPress={dismissKeyboardHandler}>
-				<View style={styles.screen}>
-					<Text style={{...Defaultstyles.titleText, ...styles.title}}> {props.title}</Text>
-					<Card style={styles.cardContainer}>
+			<KeyboardAvoidingView behavior="position" keyboardVerticalOffset={30}>
+				<TouchableWithoutFeedback onPress={dismissKeyboardHandler}>
+					<View style={styles.screen}>
+						<Text style={{...Defaultstyles.titleText, ...styles.title}}> {props.title}</Text>
+						<Card style={styles.cardContainer}>
 
-						<Text style={Defaultstyles.bodyText}> Select a Number: </Text>
-						<Input
-							style={styles.textInputContainer}
-							autoCorrect={false}
-							keyboardType="number-pad"
-							maxLength={2}
-							autoCapitalize='none'
-							blurOnSubmit
-							onChangeText={inputValidator}
-							value={textInput}
-						/>
+							<Text style={Defaultstyles.bodyText}> Select a Number: </Text>
+							<Input
+								style={styles.textInputContainer}
+								autoCorrect={false}
+								keyboardType="number-pad"
+								maxLength={2}
+								autoCapitalize='none'
+								blurOnSubmit
+								onChangeText={inputValidator}
+								value={textInput}
+							/>
 
-						<View style={styles.buttonContainer}>
-							<MainButton onPress={confirmedInputHandler} style={styles.button}>
-								<Feather name="check" size={20} color="white"/>
-							</MainButton>
+							<View style={styles.buttonContainer}>
+								<MainButton onPress={confirmedInputHandler} style={styles.button}>
+									<Feather name="check" size={20} color="white"/>
+								</MainButton>
 
-							<MainButton onPress={resetInputHandler} style={styles.button}>
-								<Entypo name="cross" size={20} color="white"/>
-							</MainButton>
-						</View>
+								<MainButton onPress={resetInputHandler} style={styles.button}>
+									<Entypo name="cross" size={20} color="white"/>
+								</MainButton>
+							</View>
 
-					</Card>
-					{confirmedOutput}
+						</Card>
+						{confirmedOutput}
 
-				</View>
-			</TouchableWithoutFeedback>
+					</View>
+				</TouchableWithoutFeedback>
+			</KeyboardAvoidingView>
 		</ScrollView>
 	);
 

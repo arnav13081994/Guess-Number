@@ -92,6 +92,7 @@ const GameScreen = (props) => {
 
 	});
 
+	// TODO Make the Returned JsX style dynamic by using the ternary operator etc and test it on 4 sizes: Small and Big Android & iOS
 
 	return (
 			<FlatList
