@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View, ScrollView} from 'react-native';
 
 
 import Card from "../components/Card";
@@ -71,38 +71,40 @@ const StartGameScreen = props => {
 	}
 
 	return (
-		<TouchableWithoutFeedback onPress={dismissKeyboardHandler}>
-			<View style={styles.screen}>
-				<Text style={{...Defaultstyles.titleText, ...styles.title}}> {props.title}</Text>
-				<Card style={styles.inputContainer}>
+		<ScrollView>
+			<TouchableWithoutFeedback onPress={dismissKeyboardHandler}>
+				<View style={styles.screen}>
+					<Text style={{...Defaultstyles.titleText, ...styles.title}}> {props.title}</Text>
+					<Card style={styles.cardContainer}>
 
-					<Text style={Defaultstyles.bodyText}> Select a Number: </Text>
-					<Input
-						style={styles.textInputContainer}
-						autoCorrect={false}
-						keyboardType="number-pad"
-						maxLength={2}
-						autoCapitalize='none'
-						blurOnSubmit
-						onChangeText={inputValidator}
-						value={textInput}
-					/>
+						<Text style={Defaultstyles.bodyText}> Select a Number: </Text>
+						<Input
+							style={styles.textInputContainer}
+							autoCorrect={false}
+							keyboardType="number-pad"
+							maxLength={2}
+							autoCapitalize='none'
+							blurOnSubmit
+							onChangeText={inputValidator}
+							value={textInput}
+						/>
 
-					<View style={styles.buttonContainer}>
-						<MainButton onPress={confirmedInputHandler} style={styles.button} >
-							<Feather name="check" size={28} color="white"/>
-						</MainButton>
+						<View style={styles.buttonContainer}>
+							<MainButton onPress={confirmedInputHandler} style={styles.button}>
+								<Feather name="check" size={20} color="white"/>
+							</MainButton>
 
-						<MainButton onPress={resetInputHandler} style={styles.button}>
-							<Entypo name="cross" size={28} color="white"/>
-						</MainButton>
-					</View>
+							<MainButton onPress={resetInputHandler} style={styles.button}>
+								<Entypo name="cross" size={20} color="white"/>
+							</MainButton>
+						</View>
 
-				</Card>
-				{confirmedOutput}
+					</Card>
+					{confirmedOutput}
 
-			</View>
-		</TouchableWithoutFeedback>
+				</View>
+			</TouchableWithoutFeedback>
+		</ScrollView>
 	);
 
 };
@@ -113,25 +115,26 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 10,
 		alignItems: 'center',
-		marginTop: 75
+		marginTop: '5%'
 	},
 	buttonContainer: {
 		flexDirection: 'row',
 		paddingHorizontal: 10,
 		width: '100%',
-		justifyContent: 'space-between',
+		justifyContent: 'space-evenly'
 	},
 	title: {
 		marginVertical: 10
 	},
-	inputContainer: {
-		width: 300,
-		maxWidth: '80%',
+	cardContainer: {
+		minWidth: 200,
+		maxWidth: '95%',
+		width: '80%',
 		alignItems: 'center',
 		marginTop: 20
 	},
 	button: {
-		width: 100,
+		width: 75,
 		alignItems: 'center',
 	},
 	textInputContainer: {
@@ -142,8 +145,6 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 		alignItems: 'center',
 	}
-
-
 });
 
 

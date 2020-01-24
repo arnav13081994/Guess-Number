@@ -97,8 +97,9 @@ const GameScreen = (props) => {
 			<FlatList
 				data={pastGuesses}
 				contentContainerStyle={{
-					width: 500,
-					maxWidth: '80%',
+					width: '95%',
+					maxWidth: '99%',
+					minWidth: 200,
 				}}
 				ListEmptyComponent={
 					<View>
@@ -118,7 +119,9 @@ const GameScreen = (props) => {
 									marginVertical: 5,
 									padding: 10,
 									borderWidth: 1,
-									alignItems: 'center'
+									alignItems: 'center',
+									elevation: 3,
+									shadowRadius: 3,
 								}
 							}>
 								<Text>
@@ -135,7 +138,7 @@ const GameScreen = (props) => {
 				ListHeaderComponent={
 							<View style={styles.screen}>
 
-								<Text style={{...Defaultstyles.titleText, marginTop: 75, alignItems: 'center',}}> Opponents Guess: </Text>
+								<Text style={{...Defaultstyles.titleText, marginTop: '10%', alignItems: 'center',}}> Opponents Guess: </Text>
 
 								<Number> {currentGuess} </Number>
 
@@ -158,9 +161,8 @@ const GameScreen = (props) => {
 
 const styles = StyleSheet.create({
 	screen: {
-		flex: 1,
-		padding: 10,
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	buttonContainer: {
 		flexDirection: 'row',
